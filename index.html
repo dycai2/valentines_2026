@@ -10,28 +10,12 @@
 
 <body>
     <!-- Floating hearts placeholders -->
-    <!-- &#10084 is a heart character -->
-    <!-- --i is a css variable, gives each heart a unique value that the CSS uses to calculate positioning -->
-    <div class="hearts-bg">
-        <span class="heart" style="--i:0;">&#10084;</span>
-        <span class="heart" style="--i:1;">&#10084;</span>
-        <span class="heart" style="--i:2;">&#10084;</span>
-        <span class="heart" style="--i:3;">&#10084;</span>
-        <span class="heart" style="--i:4;">&#10084;</span>
-        <span class="heart" style="--i:5;">&#10084;</span>
-        <span class="heart" style="--i:6;">&#10084;</span>
-        <span class="heart" style="--i:7;">&#10084;</span>
-        <span class="heart" style="--i:8;">&#10084;</span>
-        <span class="heart" style="--i:9;">&#10084;</span>
-        <span class="heart" style="--i:10;">&#10084;</span>
-        <span class="heart" style="--i:11;">&#10084;</span>
-    </div>
+    <div class="hearts-bg" id="hearts-bg"></div>
 
     <div class="content">
         <!-- Replace the placeholder below with your bear image/gif -->
         <div class="bear-placeholder">
-            <!-- e.g. <img src="bear.gif" alt="Bear with flowers"> -->
-            🧸
+            <img src="images/bear.gif">
         </div>
 
         <h1>Will you be my Valentine?</h1>
@@ -40,5 +24,63 @@
             <button class="no">No</button>
         </div>
     </div>
+
+    <script>
+        // Pin everything in place before the No button leaves the flow
+        const content = document.querySelector('.content');
+        const yesBtn = document.querySelector('.yes');
+        const noBtn = document.querySelector('.no');
+        let pinned = false;
+
+        noBtn.addEventListener('mouseover', () => {
+            if (!pinned) {
+                // Pin content and Yes button in their exact positions
+                const contentRect = content.getBoundingClientRect();
+                content.style.position = 'fixed';
+                content.style.left = contentRect.left + 'px';
+                content.style.top = contentRect.top + 'px';
+                content.style.width = contentRect.width + 'px';
+
+                const yesRect = yesBtn.getBoundingClientRect();
+                yesBtn.style.position = 'fixed';
+                yesBtn.style.left = yesRect.left + 'px';
+                yesBtn.style.top = yesRect.top + 'px';
+                yesBtn.style.zIndex = '10';
+                pinned = true;
+            }
+            const btnW = noBtn.offsetWidth;
+            const btnH = noBtn.offsetHeight;
+            const x = Math.random() * (window.innerWidth - btnW);
+            const y = Math.random() * (window.innerHeight - btnH);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+            noBtn.style.zIndex = '10';
+        });
+
+        const images = ['images/heart1.png', 'images/heart2.png', 'images/heart3.png', 'images/heart4.png'];
+        const container = document.getElementById('hearts-bg');
+        const totalHearts = 30;
+
+        for (let i = 0; i < totalHearts; i++) {
+            const span = document.createElement('span');
+            span.className = 'heart';
+
+            const img = document.createElement('img');
+            img.src = images[i % images.length];
+            span.appendChild(img);
+
+            // Evenly space hearts across the screen, with a small random offset
+            const baseLeft = (i / totalHearts) * 100;
+            const jitter = (Math.random() - 0.5) * 5;
+            span.style.setProperty('--left', (baseLeft + jitter) + '%');
+            span.style.setProperty('--size', (20 + Math.random() * 40) + 'px');
+            span.style.setProperty('--duration', (8 + Math.random() * 12) + 's');
+            span.style.setProperty('--delay', -(Math.random() * 20) + 's');
+            span.style.setProperty('--sway-duration', (3 + Math.random() * 4) + 's');
+
+            container.appendChild(span);
+        }
+    </script>
 </body>
 </html>

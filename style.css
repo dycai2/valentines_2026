@@ -28,17 +28,23 @@ body {
     position: absolute;
     color: #e53560;
     opacity: 0.5;
-    animation: float linear infinite;
-    /* each heart uses --i to stagger position, size, speed */
-    left: calc(var(--i) * 8.5%);
-    font-size: calc(12px + var(--i) * 3px);
-    animation-duration: calc(8s + var(--i) * 2s);
-    animation-delay: calc(var(--i) * -1.5s);
+    animation: float linear infinite, sway ease-in-out infinite;
+    /* --left, --size, --duration, --delay, --sway-duration are set by JS */
+    left: var(--left);
+    font-size: var(--size);
+    animation-duration: var(--duration), var(--sway-duration);
+    animation-delay: var(--delay), var(--delay);
+}
+
+.heart img {
+    width: 100px;
+    height: auto;
+    mix-blend-mode: multiply;
 }
 
 @keyframes float {
     0% {
-        transform: translateY(100vh) rotate(0deg);
+        transform: translateY(100vh);
         opacity: 0;
     }
     10% {
@@ -48,8 +54,17 @@ body {
         opacity: 0.5;
     }
     100% {
-        transform: translateY(-10vh) rotate(360deg);
+        transform: translateY(-10vh);
         opacity: 0;
+    }
+}
+
+@keyframes sway {
+    0%, 100% {
+        margin-left: -30px;
+    }
+    50% {
+        margin-left: 30px;
     }
 }
 
@@ -62,7 +77,7 @@ body {
     align-items: center;
 }
 
-/* ── Bear placeholder ── */
+/* Bear gif */
 .bear-placeholder {
     font-size: 8rem;
     margin-bottom: 1rem;
@@ -70,15 +85,15 @@ body {
 }
 
 .bear-placeholder img {
-    max-width: 200px;
+    width: 275px;
     height: auto;
 }
 
 /* "Will you be my valentine?" */
 h1 {
-    font-size: 6rem;
+    font-size: 7rem;
     color: #222;
-    margin-bottom: 6rem;
+    margin-bottom: 5rem;
     font-family: 'Gwendolyn', cursive;
     font-weight: 700;
     -webkit-text-stroke: 2px #222;
