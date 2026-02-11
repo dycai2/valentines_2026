@@ -32,6 +32,13 @@
         const noBtn = document.querySelector('.no');
         let pinned = false;
 
+        yesBtn.addEventListener('click', () => {
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = 'happy.html';
+            }, 500);
+        });
+
         noBtn.addEventListener('mouseover', () => {
             if (!pinned) {
                 // Pin content and Yes button in their exact positions

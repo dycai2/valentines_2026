@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yay!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gwendolyn:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="hearts-bg" id="hearts-bg"></div>
+
+    <div class="content">
+        <div class="cat-placeholder">
+            <img src="images/cat.gif">
+        </div>
+
+        <h1>Happy Valentines Day Pookie!</h1>
+        <div class="buttons">
+            <button class="yes">Yes</button>
+            <button class="no">No</button>
+        </div>
+    </div>
+
+    <script>
+        const images = ['images/heart1.png', 'images/heart2.png', 'images/heart3.png', 'images/heart4.png'];
+        const container = document.getElementById('hearts-bg');
+        const totalHearts = 30;
+
+        for (let i = 0; i < totalHearts; i++) {
+            const span = document.createElement('span');
+            span.className = 'heart';
+
+            const img = document.createElement('img');
+            img.src = images[i % images.length];
+            span.appendChild(img);
+
+            const baseLeft = (i / totalHearts) * 100;
+            const jitter = (Math.random() - 0.5) * 5;
+            span.style.setProperty('--left', (baseLeft + jitter) + '%');
+            span.style.setProperty('--size', (20 + Math.random() * 40) + 'px');
+            span.style.setProperty('--duration', (8 + Math.random() * 12) + 's');
+            span.style.setProperty('--delay', -(Math.random() * 20) + 's');
+            span.style.setProperty('--sway-duration', (3 + Math.random() * 4) + 's');
+
+            container.appendChild(span);
+        }
+    </script>
+</body>
+</html>
