@@ -24,6 +24,50 @@
     </div>
 
     <script>
+        const heading = document.querySelector('h1');
+        const buttonsDiv = document.querySelector('.buttons');
+        const yesBtn = document.querySelector('.yes');
+        const noBtn = document.querySelector('.no');
+
+        buttonsDiv.style.opacity = '0';
+        buttonsDiv.style.pointerEvents = 'none';
+
+        setTimeout(() => {
+            heading.style.opacity = '0';
+            heading.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                heading.textContent = 'Dinner at 6 tomorrow?';
+                heading.style.opacity = '1';
+                buttonsDiv.style.transition = 'opacity 0.5s ease';
+                buttonsDiv.style.opacity = '1';
+                buttonsDiv.style.pointerEvents = 'auto';
+            }, 500);
+        }, 2500);
+
+        yesBtn.addEventListener('click', () => {
+            document.body.classList.add('fade-out');
+            setTimeout(() => { window.location.href = 'happier.html'; }, 500);
+        });
+
+        noBtn.addEventListener('click', () => {
+            document.body.classList.add('fade-out');
+            setTimeout(() => { window.location.href = 'happier.html'; }, 500);
+        });
+
+        noBtn.addEventListener('mouseover', () => {
+            noBtn.textContent = 'Yes';
+            noBtn.className = 'yes';
+            yesBtn.textContent = 'No';
+            yesBtn.className = 'no';
+        });
+
+        yesBtn.addEventListener('mouseover', () => {
+            yesBtn.textContent = 'Yes';
+            yesBtn.className = 'yes';
+            noBtn.textContent = 'No';
+            noBtn.className = 'no';
+        });
+
         const images = ['images/heart1.png', 'images/heart2.png', 'images/heart3.png', 'images/heart4.png'];
         const container = document.getElementById('hearts-bg');
         const totalHearts = 30;
