@@ -1,6 +1,6 @@
 # Valentines 2026
 
-An interactive Valentine's Day website with animated hearts, playful buttons, and multi-page transitions.
+An interactive Valentine's Day website with animated hearts, playful buttons, and multi-page transitions. Happy Valentines Day Natalija!
 
 ## Pages
 
