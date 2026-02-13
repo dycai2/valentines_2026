@@ -15,12 +15,10 @@ An interactive Valentine's Day website with animated hearts, playful buttons, an
 - Playful, evasive "No" button mechanics
 - Confetti burst effect on the final page
 - Mobile responsive design
-- Gwendolyn cursive font styling
 
 ## Tech Stack
 
 - HTML / CSS / vanilla JavaScript
-- No frameworks or dependencies
 
 ## Running Locally
 
