@@ -162,3 +162,37 @@ body.fade-out {
     opacity: 0;
     transition: opacity 0.5s ease-out;
 }
+
+/* ── Mobile responsiveness ── */
+@media (max-width: 768px) {
+    .bear-placeholder img {
+        width: 180px;
+    }
+
+    .cat-placeholder {
+        height: 180px;
+    }
+
+    .cat-placeholder img {
+        width: 260px;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+        margin-bottom: 2.5rem;
+        -webkit-text-stroke: 1px #222;
+    }
+
+    button {
+        font-size: 1.8rem;
+        padding: 1.5rem 4rem;
+    }
+
+    .buttons {
+        gap: 1rem;
+    }
+
+    .heart img {
+        width: 60px;
+    }
+}
