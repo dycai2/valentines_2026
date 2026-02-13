@@ -1,9 +1,13 @@
+/* ===== Reset ===== */
+/* Remove default browser margins/padding and use border-box for predictable sizing */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* ===== Base body layout ===== */
+/* Full-viewport flexbox container with a soft pink background */
 body {
     min-height: 100vh;
     display: flex;
@@ -15,21 +19,23 @@ body {
     position: relative;
 }
 
-/* ── Floating hearts background ── */
+/* ===== Floating hearts background ===== */
+/* Full-screen fixed overlay that holds the animated heart elements */
 .hearts-bg {
     position: fixed;
     inset: 0;
-    pointer-events: none;
+    pointer-events: none;    /* Allow clicks to pass through */
     overflow: hidden;
     z-index: 0;
 }
 
+/* Individual heart element — positioned and animated via CSS custom properties set in JS */
+/* JS sets: --left, --size, --duration, --delay, --sway-duration */
 .heart {
     position: absolute;
     color: #e53560;
     opacity: 0.5;
     animation: float linear infinite, sway ease-in-out infinite;
-    /* --left, --size, --duration, --delay, --sway-duration are set by JS */
     left: var(--left);
     font-size: var(--size);
     animation-duration: var(--duration), var(--sway-duration);
@@ -39,9 +45,10 @@ body {
 .heart img {
     width: 100px;
     height: auto;
-    mix-blend-mode: multiply;
+    mix-blend-mode: multiply;  /* Blend heart images with the pink background */
 }
 
+/* Hearts rise from bottom to top, fading in near the start and out near the end */
 @keyframes float {
     0% {
         transform: translateY(100vh);
@@ -59,11 +66,13 @@ body {
     }
 }
 
+/* Simple fade-in used for page entrance transitions */
 @keyframes fadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
 
+/* Gentle left-right oscillation giving hearts a drifting feel */
 @keyframes sway {
     0%, 100% {
         margin-left: -30px;
@@ -73,7 +82,8 @@ body {
     }
 }
 
-/* ── Main content ── */
+/* ===== Main content container ===== */
+/* Sits above the hearts background (z-index: 1) and stacks children vertically */
 .content {
     position: relative;
     z-index: 1;
@@ -82,7 +92,7 @@ body {
     align-items: center;
 }
 
-/* Bear gif */
+/* ===== Bear gif (index.html & happier.html) ===== */
 .bear-placeholder {
     font-size: 8rem;
     margin-bottom: 1rem;
@@ -94,7 +104,9 @@ body {
     height: auto;
 }
 
-/* Cat gif — same box height as bear, image overflows upward */
+/* ===== Cat gif (happy.html) ===== */
+/* Fixed height container — the larger cat image is anchored to the bottom so it
+   overflows upward, keeping the layout consistent with the bear placeholder */
 .cat-placeholder {
     height: 275px;
     margin-bottom: 1rem;
@@ -107,28 +119,29 @@ body {
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%);  /* Center horizontally */
 }
 
-/* "Will you be my valentine?" */
+/* ===== Heading ===== */
+/* Large romantic script font for the main question / celebration text */
 h1 {
     font-size: 7rem;
     color: #222;
     margin-bottom: 5rem;
     font-family: 'Gwendolyn', cursive;
     font-weight: 700;
-    -webkit-text-stroke: 2px #222;
+    -webkit-text-stroke: 2px #222;   /* Adds definition to the thin cursive font */
     text-align: center;
     padding: 0 1rem;
 }
 
-
-/* ── Buttons ── */
+/* ===== Yes / No buttons ===== */
 .buttons {
     display: flex;
     gap: 1.5rem;
 }
 
+/* Shared button styles — large, rounded, white text */
 button {
     font-size: 3.5rem;
     padding: 3rem 8rem;
@@ -138,7 +151,7 @@ button {
     font-family: 'Georgia', serif;
     color: #fff;
     font-weight: bold;
-    transition: transform 0.2s;
+    transition: transform 0.2s;     /* Smooth pop on hover */
 }
 
 button:hover {
@@ -146,14 +159,15 @@ button:hover {
 }
 
 .yes {
-    background: #4caf50;
+    background: #4caf50;    /* Green */
 }
 
 .no {
-    background: #e05555;
+    background: #e05555;    /* Red */
 }
 
-/* ── Page transitions ── */
+/* ===== Page transitions ===== */
+/* Fade in on load; fade out triggered by adding .fade-out class in JS */
 body {
     animation: fadeIn 0.6s ease-in;
 }
@@ -163,7 +177,8 @@ body.fade-out {
     transition: opacity 0.5s ease-out;
 }
 
-/* ── Mobile responsiveness ── */
+/* ===== Mobile responsiveness (screens <= 768px) ===== */
+/* Scale down images, text, buttons, and hearts for smaller viewports */
 @media (max-width: 768px) {
     .bear-placeholder img {
         width: 180px;
@@ -180,7 +195,7 @@ body.fade-out {
     h1 {
         font-size: 3.5rem;
         margin-bottom: 2.5rem;
-        -webkit-text-stroke: 1px #222;
+        -webkit-text-stroke: 1px #222;   /* Thinner stroke at smaller size */
     }
 
     button {

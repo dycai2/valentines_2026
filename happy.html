@@ -11,12 +11,14 @@
 <body>
     <div class="hearts-bg" id="hearts-bg"></div>
 
+    <!-- Main page content: cat gif, celebration heading, and Yes/No buttons -->
     <div class="content">
         <div class="cat-placeholder">
             <img src="images/cat.gif">
         </div>
 
         <h1>Yippee!</h1>
+
         <div class="buttons">
             <button class="yes">Yes</button>
             <button class="no">No</button>
@@ -29,9 +31,11 @@
         const yesBtn = document.querySelector('.yes');
         const noBtn = document.querySelector('.no');
 
+        // Hide buttons initially — they appear after the heading changes
         buttonsDiv.style.opacity = '0';
         buttonsDiv.style.pointerEvents = 'none';
 
+        // After 2.5s, fade out the celebration text, swap it, then fade buttons in
         setTimeout(() => {
             heading.style.opacity = '0';
             heading.style.transition = 'opacity 0.5s ease';
@@ -44,6 +48,7 @@
             }, 500);
         }, 2500);
 
+        // Both yes and no buttons redirect to the final page
         yesBtn.addEventListener('click', () => {
             document.body.classList.add('fade-out');
             setTimeout(() => { window.location.href = 'happier.html'; }, 500);
@@ -54,6 +59,7 @@
             setTimeout(() => { window.location.href = 'happier.html'; }, 500);
         });
 
+        // Hovering No turns it into Yes (and vice versa)
         noBtn.addEventListener('mouseover', () => {
             noBtn.textContent = 'Yes';
             noBtn.className = 'yes';
@@ -68,21 +74,26 @@
             noBtn.className = 'no';
         });
 
+        // Floating hearts background animation
         const images = ['images/heart1.png', 'images/heart2.png', 'images/heart3.png', 'images/heart4.png'];
         const container = document.getElementById('hearts-bg');
         const totalHearts = 30;
 
+        // Dynamically create heart elements with randomized CSS custom properties
         for (let i = 0; i < totalHearts; i++) {
             const span = document.createElement('span');
             span.className = 'heart';
-
+            
             const img = document.createElement('img');
             img.src = images[i % images.length];
             span.appendChild(img);
 
+            // Spread hearts evenly across the width with slight random jitter
             const baseLeft = (i / totalHearts) * 100;
             const jitter = (Math.random() - 0.5) * 5;
             span.style.setProperty('--left', (baseLeft + jitter) + '%');
+
+            // Randomize size, fall speed, start delay, and horizontal sway
             span.style.setProperty('--size', (20 + Math.random() * 40) + 'px');
             span.style.setProperty('--duration', (8 + Math.random() * 12) + 's');
             span.style.setProperty('--delay', -(Math.random() * 20) + 's');

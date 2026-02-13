@@ -9,16 +9,16 @@
 </head>
 
 <body>
-    <!-- Floating hearts placeholders -->
     <div class="hearts-bg" id="hearts-bg"></div>
 
+    <!-- Main page content: bear gif, question, and Yes/No buttons -->
     <div class="content">
-        <!-- Replace the placeholder below with your bear image/gif -->
         <div class="bear-placeholder">
             <img src="images/bear.gif">
         </div>
 
         <h1>Will you be my Valentine?</h1>
+
         <div class="buttons">
             <button class="yes">Yes</button>
             <button class="no">No</button>
@@ -26,12 +26,14 @@
     </div>
 
     <script>
-        // Pin everything in place before the No button leaves the flow
         const content = document.querySelector('.content');
         const yesBtn = document.querySelector('.yes');
         const noBtn = document.querySelector('.no');
+
+        // Tracks whether the layout has been pinned (happens on first No hover)
         let pinned = false;
 
+        // "Yes" button: fade out and redirect to the happy page
         yesBtn.addEventListener('click', () => {
             document.body.classList.add('fade-out');
             setTimeout(() => {
@@ -39,9 +41,11 @@
             }, 500);
         });
 
+        // "No" button: runs away from the cursor on hover
         noBtn.addEventListener('mouseover', () => {
+            // On first hover, pin the content and Yes button in place
+            // so layout doesn't shift when No button goes to fixed positioning
             if (!pinned) {
-                // Pin content and Yes button in their exact positions
                 const contentRect = content.getBoundingClientRect();
                 content.style.position = 'fixed';
                 content.style.left = contentRect.left + 'px';
@@ -55,6 +59,8 @@
                 yesBtn.style.zIndex = '10';
                 pinned = true;
             }
+
+            // Teleport No button to random position
             const btnW = noBtn.offsetWidth;
             const btnH = noBtn.offsetHeight;
             const x = Math.random() * (window.innerWidth - btnW);
@@ -65,10 +71,12 @@
             noBtn.style.zIndex = '10';
         });
 
+        // Floating hearts background animation
         const images = ['images/heart1.png', 'images/heart2.png', 'images/heart3.png', 'images/heart4.png'];
         const container = document.getElementById('hearts-bg');
         const totalHearts = 30;
 
+        // Dynamically create heart elements with randomized CSS custom properties
         for (let i = 0; i < totalHearts; i++) {
             const span = document.createElement('span');
             span.className = 'heart';
@@ -77,10 +85,12 @@
             img.src = images[i % images.length];
             span.appendChild(img);
 
-            // Evenly space hearts across the screen, with a small random offset
+            // Spread hearts evenly across the width with slight random jitter
             const baseLeft = (i / totalHearts) * 100;
             const jitter = (Math.random() - 0.5) * 5;
             span.style.setProperty('--left', (baseLeft + jitter) + '%');
+
+            // Randomize size, fall speed, start delay, and horizontal sway
             span.style.setProperty('--size', (20 + Math.random() * 40) + 'px');
             span.style.setProperty('--duration', (8 + Math.random() * 12) + 's');
             span.style.setProperty('--delay', -(Math.random() * 20) + 's');
